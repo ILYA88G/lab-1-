@@ -26,7 +26,7 @@ def _convert_to_celsius(value: float, unit: str) -> float:
 
 
 def _convert_from_celsius(value_in_celsius: float, unit: str) -> float:
-    """converts temperature value from celcius to unit"""
+    """converts temperature value from celsius to unit"""
     if unit == "c":
         return value_in_celsius
     elif unit == "f":
