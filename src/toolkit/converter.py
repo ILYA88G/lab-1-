@@ -7,18 +7,24 @@ from toolkit.constants import (
 from toolkit.errors import IncompatibleUnitsError, InvalidValueError, UnknownUnitError
 
 
-def _convert_length_or_mass(value:float, convert_from: str, convert_to: str, to_base: dict[str,float]) -> float:
+def _convert_length_or_mass(
+    value: float, convert_from: str, convert_to: str, to_base: dict[str, float]
+) -> float:
     """converts value between units of the same linear group via the base unit"""
     value_in_base = value * to_base[convert_from]
     return value_in_base / to_base[convert_to]
-def _convert_to_celsius(value:float, unit: str) -> float:
+
+
+def _convert_to_celsius(value: float, unit: str) -> float:
     """converts temperature value from unit to celcius"""
-    if unit == "c": 
+    if unit == "c":
         return value
-    elif unit == "k": 
+    elif unit == "k":
         return value - 273.15
     elif unit == "f":
         return (value - 32) * 5 / 9
+
+
 def _convert_from_celsius(value_in_celsius: float, unit: str) -> float:
     """converts temperature value from celcius to unit"""
     if unit == "c":
@@ -27,10 +33,12 @@ def _convert_from_celsius(value_in_celsius: float, unit: str) -> float:
         return value_in_celsius * 9 / 5 + 32
     elif unit == "k":
         return value_in_celsius + 273.15
+
+
 def convert(value: float, convert_from: str, convert_to: str) -> float:
     """converts value from convert_from to convert_to; the units must belong to the same group"""
-    convert_from=convert_from.strip().lower()
-    convert_to=convert_to.strip().lower()
+    convert_from = convert_from.strip().lower()
+    convert_to = convert_to.strip().lower()
     if convert_from not in UNIT_GROUPS:
         raise UnknownUnitError(f"Неизвестная единица измерения: '{convert_from}'")
     if convert_to not in UNIT_GROUPS:
