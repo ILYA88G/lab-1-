@@ -18,7 +18,7 @@ class ConverterError(ToolkitError):
     """Class for all converter errors"""
 class UnknownUnitError (ConverterError):
     """An unknown unit of measurement has been introduced."""
-class IncompatiableUnitsError (ConverterError):
+class IncompatibleUnitsError (ConverterError):
     """Different groups of measurement units"""
 class InvalidValueError (ConverterError):
     """An unacceptable value has been entered."""
