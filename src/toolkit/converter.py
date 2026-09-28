@@ -1,7 +1,7 @@
 from toolkit.constants import (
     ABSOLUTE_ZERO_CELSIUS,
     LENGTH_TO_METERS,
-    MASS_TO_GRAMS,
+    MASS_TO_GRAMMS,
     UNIT_GROUPS,
 )
 from toolkit.errors import IncompatibleUnitsError, InvalidValueError, UnknownUnitError
