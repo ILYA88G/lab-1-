@@ -1,25 +1,32 @@
 class ToolkitError(Exception):
     """Class for all toolkit errors."""
-class CalculatorError (ToolkitError):
+class CalculatorError(ToolkitError):
     """Class for all calculator errors"""
-class EmptyExpressionError (CalculatorError):
+class EmptyExpressionError(CalculatorError):
     """Emtpy string input"""
-class InvalidSymbolError (CalculatorError):
+class InvalidSymbolError(CalculatorError):
     """An unknown character has been entered"""
-class MissingOperandError (CalculatorError):
+class MissingOperandError(CalculatorError):
     """Missing 1 or more than 1 operands"""
-class OperandConsecutionError (CalculatorError):
+class OperandConsecutionError(CalculatorError):
     """Two or more operands in raw"""
-class DivisionByZeroError (CalculatorError):
+class DivisionByZeroError(CalculatorError):
     """Divising by zero"""
-class InvalidNumberError (CalculatorError):
+class InvalidNumberError(CalculatorError):
     """Incorrect numerical value"""
 class ConverterError(ToolkitError):
     """Class for all converter errors"""
-class UnknownUnitError (ConverterError):
+class UnknownUnitError(ConverterError):
     """An unknown unit of measurement has been introduced."""
+<<<<<<< HEAD
 class IncompatibleUnitsError (ConverterError):
+=======
+class IncompatibleUnitsError(ConverterError):
+>>>>>>> 49a52c9 (fix:the variable names have been corrected)
     """Different groups of measurement units"""
-class InvalidValueError (ConverterError):
+class InvalidValueError(ConverterError):
     """An unacceptable value has been entered."""
+<<<<<<< HEAD
     
+=======
+>>>>>>> 49a52c9 (fix:the variable names have been corrected)
