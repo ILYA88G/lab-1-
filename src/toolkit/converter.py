@@ -61,5 +61,5 @@ def convert(value: float, convert_from: str, convert_to: str) -> float:
             )
         return _convert_from_celsius(celsius_value, convert_to)
 
-    to_base = LENGTH_TO_METERS if from_group == "length" else MASS_TO_GRAMS
+    to_base = LENGTH_TO_METERS if from_group == "length" else MASS_TO_GRAMMS
     return _convert_length_or_mass(value, convert_from, convert_to, to_base)
