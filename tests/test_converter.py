@@ -31,7 +31,7 @@ def test_convert_length():
     assert convert(12,"km","m") == 12000.0
     assert convert(10000,"mm","cm") == 1000.0
     assert convert(0.12,"m","cm") == 12.0
-    assert convert(10,"mm","km") == 0.000001
+    assert convert(10,"mm","km") == pytest.approx(0.00001)
     assert convert(1,"km","km") == 1.0
 def test_convert_mass():
     assert convert(120,"kg","kg") == 120.0
@@ -48,4 +48,4 @@ def test_convert_absolute_zero_temperature():
 def test_convert_upper_register():
     assert convert(4,"kM","m") == 4000.0
     assert convert(30,"G","kG") == 0.03
-    assert convert(300,"k", "C") == 26.85
+    assert convert(300,"k","C") == pytest.approx(26.85)
