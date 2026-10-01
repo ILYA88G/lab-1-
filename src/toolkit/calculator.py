@@ -1,4 +1,13 @@
-from toolkit.errors import InvalidSymbolError, MissingOperandError, OperatorsConsecutionError, InvalidNumberError, DivisionByZeroError, EmptyExpressionError
+from toolkit.errors import (
+    DivisionByZeroError,
+    EmptyExpressionError,
+    InvalidNumberError,
+    InvalidSymbolError,
+    MissingOperandError,
+    OperatorsConsecutionError,
+)
+
+
 def tokenizator(expression: str) -> list[str]:
     """Splits the expression string into a list of tokens: numbers and operators"""
     tokens = []
@@ -49,7 +58,7 @@ def _parse_term(tokens: list[str]) -> float:
         else:
             if right == 0:
                 raise DivisionByZeroError("Попытка делить на ноль")
-            valure /= right
+            value /= right
     return value
 def _parse_expr(tokens: list[str]) -> float:
     """Analyzes a chain of addictions and substractions"""
