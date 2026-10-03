@@ -1,5 +1,5 @@
 class ToolkitError(Exception):
-    """Class for all toolkit errors."""
+    """Class for all toolkit errors"""
 
 
 class CalculatorError(ToolkitError):
