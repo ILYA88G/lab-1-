@@ -16,19 +16,21 @@ def tokenizator(expression: str) -> list[str]:
         if character == " ":
             if current_number:
                 tokens.append(current_number)
-                current_number=""
-        elif character in "0123456789" or character==".":
-            current_number+=character
+                current_number = ""
+        elif character in "0123456789" or character == ".":
+            current_number += character
         elif character in "+-*/":
             if current_number:
                 tokens.append(current_number)
-                current_number=""
+                current_number = ""
             tokens.append(character)
         else:
             raise InvalidSymbolError(f"Недопустимый символ:{character}")
-    if current_number: 
+    if current_number:
         tokens.append(current_number)
     return tokens
+
+
 def _parse_factor(tokens: list[str]) -> float:
     """Analyzes one number for the presence of unary +/- in front of it"""
     if not tokens:
@@ -47,6 +49,8 @@ def _parse_factor(tokens: list[str]) -> float:
         return float(token)
     except ValueError:
         raise InvalidNumberError(f"Некорректное число: {token}")
+
+
 def _parse_term(tokens: list[str]) -> float:
     """Analyzes a chain of multiplications and divisions"""
     value = _parse_factor(tokens)
@@ -60,6 +64,8 @@ def _parse_term(tokens: list[str]) -> float:
                 raise DivisionByZeroError("Попытка делить на ноль")
             value /= right
     return value
+
+
 def _parse_expr(tokens: list[str]) -> float:
     """Analyzes a chain of addictions and substractions"""
     value = _parse_term(tokens)
@@ -71,11 +77,13 @@ def _parse_expr(tokens: list[str]) -> float:
         else:
             value -= right
     return value
+
+
 def calculate(expression: str) -> float:
-    tokens=tokenizator(expression)
+    tokens = tokenizator(expression)
     if not tokens:
         raise EmptyExpressionError("Пустое выражение")
     result = _parse_expr(tokens)
     if tokens:
-        raise OperatorsConsecutionError(F"Неожиданный токен: {tokens[0]}")
+        raise OperatorsConsecutionError(f"Неожиданный токен: {tokens[0]}")
     return result
