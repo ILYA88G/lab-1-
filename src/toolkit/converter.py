@@ -10,7 +10,7 @@ from toolkit.errors import IncompatibleUnitsError, InvalidValueError, UnknownUni
 def _convert_length_or_mass(
     value: float, convert_from: str, convert_to: str, to_base: dict[str, float]
 ) -> float:
-    """converts value between units of the same linear group via the base unit"""
+    """Converts value between units of the same linear group via the base unit"""
     value_in_base = value * to_base[convert_from]
     return value_in_base / to_base[convert_to]
 
@@ -26,7 +26,7 @@ def _convert_to_celsius(value: float, unit: str) -> float:
 
 
 def _convert_from_celsius(value_in_celsius: float, unit: str) -> float:
-    """converts temperature value from celsius to unit"""
+    """Converts temperature value from celsius to unit"""
     if unit == "c":
         return value_in_celsius
     elif unit == "f":
@@ -36,7 +36,7 @@ def _convert_from_celsius(value_in_celsius: float, unit: str) -> float:
 
 
 def convert(value: float, convert_from: str, convert_to: str) -> float:
-    """converts value from convert_from to convert_to; the units must belong to the same group"""
+    """Converts value from convert_from to convert_to; the units must belong to the same group"""
     convert_from = convert_from.strip().lower()
     convert_to = convert_to.strip().lower()
     if convert_from not in UNIT_GROUPS:
