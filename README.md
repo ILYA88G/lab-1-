@@ -54,11 +54,14 @@ python -m toolkit calc "23+4*3"
 python -m toolkit calc "12 *    (12-9)"
 # 36.0
 
+python -m toolkit calc "12*(3/(5-6))" 
+# -36.0
+
 python -m toolkit calc "30//7"
 # 4.0
 
 python -m toolkit calc "-33%12"
-#3.0
+# 3.0
 
 python -m toolkit convert 5 --from cm --to m
 # 0.05
