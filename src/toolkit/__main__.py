@@ -60,7 +60,7 @@ def main() -> None:
     except ToolkitError as err:
         print(f"Ошибка: {err}", file=sys.stderr)
         sys.exit(2)
-    print(result)
+    print(round(result, 10))
 
 
 if __name__ == "__main__":
