@@ -18,6 +18,10 @@ class MissingOperandError(CalculatorError):
     """Missing 1 or more than 1 operands"""
 
 
+class UnbalancedParenthesesError(CalculatorError):
+    """Unbalanced parentheses in the expression"""
+
+
 class OperatorsConsecutionError(CalculatorError):
     """Two or more operators in row"""
 

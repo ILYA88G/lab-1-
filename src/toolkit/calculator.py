@@ -5,85 +5,107 @@ from toolkit.errors import (
     InvalidSymbolError,
     MissingOperandError,
     OperatorsConsecutionError,
+    UnbalancedParenthesesError,
 )
+
+MULTIPLICATIVE_OPERATORS = ("*", "/", "//", "%")
 
 
 def tokenizator(expression: str) -> list[str]:
     """Splits the expression string into a list of tokens: numbers and operators"""
     tokens = []
     current_number = ""
-    for character in expression:
+    i = 0
+    while i < len(expression):
+        character = expression[i]
         if character == " ":
             if current_number:
                 tokens.append(current_number)
                 current_number = ""
         elif character in "0123456789" or character == ".":
             current_number += character
-        elif character in "+-*/":
+        elif character == "/" and i + 1 < len(expression) and expression[i + 1] == "/":
+            if current_number:
+                tokens.append(current_number)
+                current_number = ""
+            tokens.append("//")
+            i += 1
+        elif character in "+-*/%()":
             if current_number:
                 tokens.append(current_number)
                 current_number = ""
             tokens.append(character)
         else:
-            raise InvalidSymbolError(f"Недопустимый символ:{character}")
+            raise InvalidSymbolError(f"Недопустимый символ: '{character}'")
+        i += 1
     if current_number:
         tokens.append(current_number)
     return tokens
 
 
 def _parse_factor(tokens: list[str]) -> float:
-    """Analyzes one number for the presence of unary +/- in front of it"""
+    """factor → ('+' | '-') factor | NUMBER | '(' expr ')'"""
     if not tokens:
-        raise MissingOperandError("Отсутствует необходимый для вычисления операнд")
-    if tokens[0] in "+-":
+        raise MissingOperandError("Ожидался операнд, но выражение закончилось")
+    if tokens[0] in ("+", "-"):
         operator = tokens.pop(0)
         value = _parse_factor(tokens)
-        if operator == "+":
-            return value
-        else:
-            return -value
-    if tokens[0] in "*/":
-        raise OperatorsConsecutionError(f"Неожиданный оператор: {tokens[0]}")
+        return value if operator == "+" else -value
+    if tokens[0] == "(":
+        tokens.pop(0)
+        value = _parse_expr(tokens)
+        if not tokens or tokens[0] != ")":
+            raise UnbalancedParenthesesError("Непарная открывающая скобка")
+        tokens.pop(0)
+        return value
+    if tokens[0] in MULTIPLICATIVE_OPERATORS or tokens[0] == ")":
+        raise OperatorsConsecutionError(f"Неожиданный токен: '{tokens[0]}'")
     token = tokens.pop(0)
     try:
         return float(token)
     except ValueError:
-        raise InvalidNumberError(f"Некорректное число: {token}")
+        raise InvalidNumberError(f"Некорректное число: '{token}'")
 
 
 def _parse_term(tokens: list[str]) -> float:
-    """Analyzes a chain of multiplications and divisions"""
+    """term → factor (('*' | '/' | '//' | '%') factor)*"""
     value = _parse_factor(tokens)
-    while tokens and tokens[0] in "*/":
+    while tokens and tokens[0] in MULTIPLICATIVE_OPERATORS:
         operator = tokens.pop(0)
         right = _parse_factor(tokens)
         if operator == "*":
             value *= right
+        elif operator == "/":
+            if right == 0:
+                raise DivisionByZeroError("Деление на ноль")
+            value /= right
+        elif operator == "//":
+            if right == 0:
+                raise DivisionByZeroError("Деление на ноль")
+            value //= right
         else:
             if right == 0:
-                raise DivisionByZeroError("Попытка делить на ноль")
-            value /= right
+                raise DivisionByZeroError("Деление на ноль")
+            value %= right
     return value
 
 
 def _parse_expr(tokens: list[str]) -> float:
-    """Analyzes a chain of addictions and substractions"""
+    """expr → term (('+' | '-') term)*"""
     value = _parse_term(tokens)
-    while tokens and tokens[0] in "+-":
+    while tokens and tokens[0] in ("+", "-"):
         operator = tokens.pop(0)
         right = _parse_term(tokens)
-        if operator == "+":
-            value += right
-        else:
-            value -= right
+        value = value + right if operator == "+" else value - right
     return value
 
 
 def calculate(expression: str) -> float:
+    """Главная функция ядра: токенизация, разбор и вычисление выражения."""
     tokens = tokenizator(expression)
     if not tokens:
         raise EmptyExpressionError("Пустое выражение")
     result = _parse_expr(tokens)
     if tokens:
-        raise OperatorsConsecutionError(f"Неожиданный токен: {tokens[0]}")
+        raise OperatorsConsecutionError(f"Неожиданный токен: '{tokens[0]}'")
     return result
