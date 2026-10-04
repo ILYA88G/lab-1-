@@ -8,7 +8,7 @@ def run_cli(*args):
         [sys.executable, "-m", "toolkit", *args],
         capture_output=True,
         text=True,
-        check = False
+        check=False,
     )
 
 
