@@ -10,8 +10,8 @@
 .
 ├── src/
 │ └── toolkit/
-│ ├── init.py
-│ ├── main.py # точка входа CLI (python -m toolkit)
+│ ├── __init__.py
+│ ├── __main__.py # точка входа CLI (python -m toolkit)
 │ ├── calculator.py # токенизация и вычисление выражений с использованием рекурсивного спуска (recursive descent)
 │ ├── converter.py # конвертация длины, массы и температуры
 │ └── errors.py # иерархия пользовательских исключений
