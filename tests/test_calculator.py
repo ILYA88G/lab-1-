@@ -38,7 +38,7 @@ def test_calculate_consecutive_operators_raises():
         calculate("342+/7")
 
 
-def test_unbalanced_parentheses_raises():
+def test_calculate_with_unbalanced_parentheses_raises():
     with pytest.raises(UnbalancedParenthesesError):
         calculate("32*(4-5")
 
@@ -59,7 +59,7 @@ def test_calculate_division_with_remainder_by_zero_raises():
 
 
 # Positive tests
-def test_calculate_left_associative_substraction():
+def test_calculate_left_associative_subtraction():
     assert calculate("10-2-6") == 2.0
 
 
