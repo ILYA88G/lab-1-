@@ -40,6 +40,16 @@ def test_convert_below_absolute_zero_celsius_raises():
         convert(-275, "c", "f")
 
 
+def test_convert_negative_length():
+    with pytest.raises(InvalidValueError):
+        convert (-5, "km", "mm")
+
+
+def test_convert_negative_mass():
+    with pytest.raises(InvalidValueError):
+        convert (-5, "g", "kg")
+
+
 # Positive tests
 def test_convert_length():
     assert convert(12, "km", "m") == 12000.0
