@@ -20,7 +20,7 @@ def _convert_length_or_mass(
 
 
 def _convert_to_celsius(value: float, unit: str) -> float:
-    """converts temperature value from unit to celsius"""
+    """Converts temperature value from unit to celsius"""
     if unit == "c":
         return value
     elif unit == "k":

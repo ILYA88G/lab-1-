@@ -47,4 +47,4 @@ class IncompatibleUnitsError(ConverterError):
 
 
 class InvalidValueError(ConverterError):
-    """An unacceptable value has been entered."""
+    """An unacceptable value has been entered"""
