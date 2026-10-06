@@ -1,10 +1,14 @@
 from toolkit.constants import (
     ABSOLUTE_ZERO_CELSIUS,
     LENGTH_TO_METERS,
-    MASS_TO_GRAMMS,
+    MASS_TO_GRAMS,
     UNIT_GROUPS,
 )
-from toolkit.errors import IncompatibleUnitsError, InvalidValueError, UnknownUnitError
+from toolkit.errors import (
+    IncompatibleUnitsError,
+    InvalidValueError,
+    UnknownUnitError,
+)
 
 
 def _convert_length_or_mass(
@@ -61,5 +65,5 @@ def convert(value: float, convert_from: str, convert_to: str) -> float:
             )
         return _convert_from_celsius(celsius_value, convert_to)
 
-    to_base = LENGTH_TO_METERS if from_group == "length" else MASS_TO_GRAMMS
+    to_base = LENGTH_TO_METERS if from_group == "length" else MASS_TO_GRAMS
     return _convert_length_or_mass(value, convert_from, convert_to, to_base)
