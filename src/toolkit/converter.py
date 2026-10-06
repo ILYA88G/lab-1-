@@ -57,7 +57,7 @@ def convert(value: float, convert_from: str, convert_to: str) -> float:
             f"в '{convert_to}' ({to_group})"
         )
 
-    if value<0 and (from_group == "length" or from_group == "mass"):
+    if value < 0 and (from_group == "length" or from_group == "mass"):
         raise InvalidValueError(
             f"Невозможно конвертировать отрицательное значение: {value}{convert_from}"
         )

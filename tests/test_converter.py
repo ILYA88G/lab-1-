@@ -42,12 +42,12 @@ def test_convert_below_absolute_zero_celsius_raises():
 
 def test_convert_negative_length():
     with pytest.raises(InvalidValueError):
-        convert (-5, "km", "mm")
+        convert(-5, "km", "mm")
 
 
 def test_convert_negative_mass():
     with pytest.raises(InvalidValueError):
-        convert (-5, "g", "kg")
+        convert(-5, "g", "kg")
 
 
 # Positive tests
