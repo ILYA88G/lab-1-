@@ -57,9 +57,14 @@ def convert(value: float, convert_from: str, convert_to: str) -> float:
             f"в '{convert_to}' ({to_group})"
         )
 
+    if value<0 and (from_group == "length" or from_group == "mass"):
+        raise InvalidValueError(
+            f"Невозможно конвертировать отрицательное значение: {value}{convert_from}"
+        )
+
     if from_group == "temperature":
         celsius_value = _convert_to_celsius(value, convert_from)
-        if celsius_value < ABSOLUTE_ZERO_CELSIUS - 1e-9:
+        if celsius_value <= ABSOLUTE_ZERO_CELSIUS - 1e-9:
             raise InvalidValueError(
                 f"Температура ниже абсолютного нуля: {value}{convert_from}"
             )
