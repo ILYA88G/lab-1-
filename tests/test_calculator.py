@@ -76,7 +76,7 @@ def test_calculate_expression_with_whitespaces():
     assert calculate("2    *2") == 4.0
 
 
-def test_ccalculate_with_correct_priorety():
+def test_calculate_with_correct_priorety():
     assert calculate("13/5*4") == 10.4
     assert calculate("12-3*5") == -3.0
     assert calculate("45/3/5*3") == 9.0
