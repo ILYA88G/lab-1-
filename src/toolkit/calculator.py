@@ -101,7 +101,7 @@ def _parse_expr(tokens: list[str]) -> float:
 
 
 def calculate(expression: str) -> float:
-    """Main function of CLI: tokenization, analysis and calculation of the expression"""
+    """Main function of the calculator core: tokenization, analysis and calculation of the expression"""
     tokens = tokenizator(expression)
     if not tokens:
         raise EmptyExpressionError("Пустое выражение")
